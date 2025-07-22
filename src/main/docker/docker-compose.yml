@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres16
+    image: postgres:16
     environment:
       POSTGRES_DB: alumni_front_db
       POSTGRES_USER: postgres
