@@ -3,6 +3,7 @@ package org.acme.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.acme.dto.AuthDto;
 import org.acme.entities.User;
 import org.acme.exceptions.UserAlreadyExist;
@@ -25,7 +26,7 @@ public class AuthService {
     @Inject
     BCryptService bcryptService;
 
-    public String login(AuthDto authDto) {
+    public String login( AuthDto authDto) {
         User user = userRepository.findByUsername(authDto.getUsername())
                 .orElseThrow(() -> new UserNotFoundException("User " + authDto.getUsername() + " not found"));
 

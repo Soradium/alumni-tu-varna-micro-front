@@ -1,8 +1,10 @@
 package org.acme.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import io.quarkus.security.jpa.Password;
 import io.quarkus.security.jpa.Roles;
 import io.quarkus.security.jpa.UserDefinition;
+import io.quarkus.security.jpa.Username;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -19,17 +21,21 @@ public class User extends PanacheEntityBase {
 
     @NotNull
     @NotBlank
+    @Username
     private String username;
 
     @NotNull
     @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 6)
+    @Password
+    @Column(name = "password_hash")
     private String password;
 
     @Column(name = "alumni_id")
     private int alumniId;
 
     @Roles
+    @Column(name = "roles")
     public String role;
 
     public User() {
@@ -51,11 +57,11 @@ public class User extends PanacheEntityBase {
         this.username = username;
     }
 
-    public @NotBlank @Size(min = 6, max = 20) String getPassword() {
+    public @NotBlank @Size(min = 6) String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotBlank @Size(min = 6, max = 20) String password) {
+    public void setPassword(@NotBlank @Size(min = 6) String password) {
         this.password = password;
     }
 

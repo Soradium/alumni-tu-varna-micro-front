@@ -1,5 +1,6 @@
 package org.acme.controllers;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -11,6 +12,7 @@ import org.acme.service.AuthService;
 @Path("/auth")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@PermitAll
 public class AuthController {
     @Inject
     AuthService authService;
