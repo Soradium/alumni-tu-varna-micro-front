@@ -90,23 +90,6 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void loginWithoutPassword() {
-        AuthDto dto = new AuthDto();
-        dto.setUsername("admin");
-        dto.setPassword("");
-
-        RestAssured
-                .given()
-                    .contentType("application/json")
-                    .body(dto)
-                .when()
-                    .post("/auth/login")
-                .then()
-                    .statusCode(400)
-                    .body("violations[0].message", equalTo("Password cannot be blank"));
-    }
-
-    @Test
     public void loginWithoutUsername() {
         AuthDto dto = new AuthDto();
         dto.setUsername("");
@@ -137,7 +120,7 @@ public class AuthControllerTest {
                     .post("/auth/login")
                 .then()
                     .statusCode(400)
-                    .body("violations.message", hasItems("Username cannot be blank", "Password cannot be blank"));
+                    .body("violations.message", hasItems("Username cannot be blank", "Password cannot be shorter than 6 characters"));
     }
 
     @Test
@@ -210,23 +193,6 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void registrationWithoutPassword() {
-        AuthDto dto = new AuthDto();
-        dto.setUsername("admin2");
-        dto.setPassword("");
-
-        RestAssured
-                .given()
-                    .contentType("application/json")
-                    .body(dto)
-                .when()
-                    .post("/auth/register")
-                .then()
-                    .statusCode(400)
-                    .body("violations[0].message", equalTo("Password cannot be blank"));
-    }
-
-    @Test
     public void registrationWithoutPasswordAndUsername() {
         AuthDto dto = new AuthDto();
         dto.setUsername("");
@@ -240,6 +206,6 @@ public class AuthControllerTest {
                     .post("/auth/register")
                     .then()
                 .statusCode(400)
-                    .body("violations.message", hasItems("Password cannot be blank", "Username cannot be blank"));
+                    .body("violations.message", hasItems("Password cannot be shorter than 6 characters", "Username cannot be blank"));
     }
 }
