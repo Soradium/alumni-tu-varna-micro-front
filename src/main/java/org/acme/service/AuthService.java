@@ -47,6 +47,7 @@ public class AuthService {
 
         user.setPassword(bcryptService.hashPassword(authDto.getPassword()));
         user.setUsername(authDto.getUsername());
+        user.setRole("ADMIN");
 
         userRepository.persistAndFlush(user);
     }

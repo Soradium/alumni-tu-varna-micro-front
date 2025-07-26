@@ -10,25 +10,18 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.PrivateKey;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Base64;
 import java.util.Set;
 
 @ApplicationScoped
 public class JwtService {
 
-    @ConfigProperty(name = "smallrye.jwt.sign.key")
-    String secretKey;
-
     public String generateToken(String username, String role) {
         return Jwt.issuer("tu-varna")
                 .subject(username)
                 .groups(role)
                 .expiresIn(Duration.ofDays(7))
-                .sign(getSignedKey(secretKey));
-    }
-
-    public SecretKey getSignedKey(String secretKey) {
-        byte[] decodedKey = Base64.getDecoder().decode(secretKey);
-        return new SecretKeySpec(decodedKey, "HmacSHA256");
+                .sign("privateKey.pem");
     }
 }

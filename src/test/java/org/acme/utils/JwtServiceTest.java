@@ -25,14 +25,11 @@ public class JwtServiceTest {
     @Inject
     JWTParser parser;
 
-    @ConfigProperty(name = "mp.jwt.verify.key")
-    String secretKey;
-
     @Test
     public void correctTokenGeneration() throws ParseException {
         String token = jwtService.generateToken("admin", "admin");
 
-        JsonWebToken rawToken = parser.verify(token, jwtService.getSignedKey(secretKey));
+        JsonWebToken rawToken = parser.parse(token);
 
         assertEquals(rawToken.getSubject(), "admin");
         assertEquals(rawToken.getGroups(), Set.of("admin"));

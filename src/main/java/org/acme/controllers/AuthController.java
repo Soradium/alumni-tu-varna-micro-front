@@ -19,6 +19,7 @@ public class AuthController {
 
     @POST
     @Path("/login")
+    @PermitAll
     public Response login(@Valid AuthDto authDto) {
         String token = authService.login(authDto);
         return Response.ok(token).build();
@@ -26,6 +27,7 @@ public class AuthController {
 
     @POST
     @Path("/register")
+    @PermitAll
     public Response register(@Valid AuthDto authDto) {
         authService.register(authDto);
         return Response.ok().build();
