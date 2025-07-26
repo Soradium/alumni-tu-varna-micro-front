@@ -17,11 +17,15 @@ import java.util.Set;
 @ApplicationScoped
 public class JwtService {
 
+    @ConfigProperty(name = "mp.jwt.private-key.location")
+    String privateKeyLocation;
+
+
     public String generateToken(String username, String role) {
         return Jwt.issuer("tu-varna")
                 .subject(username)
                 .groups(role)
                 .expiresIn(Duration.ofDays(7))
-                .sign("privateKey.pem");
+                .sign(privateKeyLocation);
     }
 }
