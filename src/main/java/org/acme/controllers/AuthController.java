@@ -1,5 +1,6 @@
 package org.acme.controllers;
 
+import avro.alumni.AlumniSchemaDto;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
