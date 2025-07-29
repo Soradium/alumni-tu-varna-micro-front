@@ -34,6 +34,11 @@
             <id>confluent</id>
             <url>https://packages.confluent.io/maven/</url>
         </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/OleksPorokhnia/alumni-avro-schemas</url>
+        </repository>
     </repositories>
 
 
