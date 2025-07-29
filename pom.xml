@@ -36,6 +36,7 @@
         </repository>
         <repository>
             <id>github</id>
+            <name>GitHub OleksPorokhnia Maven Repo</name>
             <url>https://maven.pkg.github.com/OleksPorokhnia/alumni-avro-schemas</url>
         </repository>
     </repositories>
@@ -123,7 +124,7 @@
         <dependency>
             <groupId>com.alex.project</groupId>
             <artifactId>avro-alumni-schemas</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
