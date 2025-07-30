@@ -17,12 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up Java and Maven auth for GitHub Packages
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: temurin
           cache: maven
+          server-id: github
+          settings-path: ${{ github.workspace }}
+          token: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Build
         run: ./mvnw verify -B
