@@ -56,7 +56,7 @@ public class AlumniProducer {
 
     //As soon as we receive reply from backend service kafka launch this code
     @Incoming("alumni-group-data-in")
-    public void onReply(Message<AlumniGroupDto> message) {
+    public CompletionStage<Void> onReply(Message<AlumniGroupDto> message) {
         String correlationId = message.getMetadata(CorrelationIdMetadata.class)
                 .map(CorrelationIdMetadata::getCorrelationId)
                 .orElse(null); //extract UUID
@@ -69,5 +69,7 @@ public class AlumniProducer {
                 future.complete(message.getPayload());
             }
         }
+
+        return message.ack();
     }
 }
