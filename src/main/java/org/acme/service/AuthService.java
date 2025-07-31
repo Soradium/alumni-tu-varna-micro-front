@@ -38,7 +38,7 @@ public class AuthService {
 
 
     @Transactional
-    public void register(AuthDto authDto) {
+    public String register(AuthDto authDto) {
         if (userRepository.findByUsername(authDto.getUsername()).isPresent()) {
             throw new UserAlreadyExist("User " + authDto.getUsername() +  " already exist");
         }
@@ -50,6 +50,8 @@ public class AuthService {
         user.setRole("ADMIN");
 
         userRepository.persistAndFlush(user);
+
+        return jwtService.generateToken(authDto.getUsername(), user.getRole());
     }
 
 }
