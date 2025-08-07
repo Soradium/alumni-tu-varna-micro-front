@@ -29,7 +29,7 @@ public class AuthController {
     @Path("/register")
     @PermitAll
     public Response register(@Valid AuthDto authDto) {
-        authService.register(authDto);
-        return Response.ok().build();
+        String token = authService.register(authDto);
+        return Response.ok(token).build();
     }
 }
